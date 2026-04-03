@@ -1,0 +1,136 @@
+/* BASE DO SITE */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #1a3a6d; /* Fundo da página azul */
+}
+
+/* O CARD DO SIMULADO (AGORA CINZA) */
+.container {
+    max-width: 900px;
+    margin: 100px auto 40px;
+    background-color: #f4f4f4 !important; /* CINZA CLARO SOLICITADO */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: #2d2d2d;
+    border-top: 8px solid #c04836;
+    display: block;
+}
+
+/* AS ALTERNATIVAS (BRANCAS PARA DAR CONTRASTE) */
+.opcao {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.05rem;
+    transition: all 0.2s;
+    color: #2d2d2d;
+}
+
+.opcao:hover {
+    border-color: #f1b44c;
+    background: #fffdf5;
+}
+
+.opcao.selected {
+    background-color: #f1b44c !important;
+    border-color: #1a3a6d;
+    font-weight: bold;
+    color: #000;
+}
+
+/* AUXILIARES */
+.hidden { display: none !important; }
+
+/* Adicione aqui o restante do seu CSS de botões e timer se necessário */
+
+
+/* ============================= */
+/* RESPONSIVO CORRIGIDO */
+/* ============================= */
+
+@media (max-width:1024px){
+
+.search-bar{
+max-width:420px;
+width:100%;
+}
+
+.support-text{
+flex-wrap:wrap;
+}
+
+}
+
+@media (max-width:768px){
+
+.search-bar{
+width:90%;
+}
+
+.search-container{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.support-text{
+flex-wrap:wrap;
+gap:15px;
+}
+
+}
+
+@media (max-width:480px){
+
+.search-bar{
+width:85%;
+font-size:0.9rem;
+}
+
+.btn-comece{
+padding:12px 30px;
+font-size:0.9rem;
+}
+
+.footer-cta h2{
+font-size:1.2rem;
+}
+
+}
+
+
+/* ============================= */
+/* AJUSTE DO RETÂNGULO VERMELHO */
+/* ============================= */
+
+.footer-cta{
+    background-color:#c04836;
+    padding:40px 20px;
+    text-align:center;
+    color:white;
+}
+
+.footer-cta h2{
+    font-weight:normal;
+    margin-bottom:15px;
+    font-size:1.8rem;
+}
+
+.btn-comece{
+    background-color:#f1b44c;
+    color:black;
+    padding:14px 40px;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    text-transform:uppercase;
+    font-size:1rem;
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Jurídico - Qjuris</title>
+    <style>
+        /* FUNDO COLORIDO PARA PREENCHER O ESPAÇO BRANCO */
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #f0f2f5; 
+            background-image: 
+                radial-gradient(circle at 5% 10%, rgba(241, 180, 76, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 95% 90%, rgba(40, 167, 69, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(26, 58, 109, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+        
+        /* CABEÇALHO ORIGINAL */
+        .header-top { background-color: #212121; padding: 20px 5%; text-align: center; color: white; font-weight: bold; font-size: 1.2rem; }
+        .header-top span { color: #c04836; }
+
+        .quiz-container { 
+            max-width: 700px; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            border: 1px solid #ddd;
+        }
+
+        h1 { color: #1a3a6d; font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* BARRA DE PROGRESSO: AMARELO PARA VERDE */
+        .progress-container { 
+            background: #e9ecef; 
+            border-radius: 10px; 
+            height: 16px; 
+            margin: 25px 0; 
+            overflow: hidden; 
+            border: 1px solid #ccc; 
+        }
+        #progress-bar { 
+            background: linear-gradient(90deg, #f1b44c 0%, #28a745 100%); 
+            width: 0%; 
+            height: 100%; 
+            transition: width 0.6s ease; 
+        }
+
+        /* QUESTÕES COM AS TRÊS CORES PARA PREENCHER O VISUAL */
+        .question-box {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            border-top: 8px solid #f1b44c;    /* Amarelo */
+            border-left: 8px solid #1a3a6d;   /* Azul */
+            border-right: 8px solid #c04836;  /* Vermelho */
+            margin-bottom: 20px;
+        }
+
+        .active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        p.question-text { font-size: 1.25rem; font-weight: 700; color: #1a3a6d; text-align: left; margin-bottom: 25px; line-height: 1.4; }
+
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .btn-option { 
+            background: #fdfdfd; 
+            border: 2px solid #eee; 
+            padding: 18px; 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            text-align: left; 
+            transition: 0.3s;
+            color: #444;
+        }
+
+        .btn-option:hover { 
+            border-color: #28a745; 
+            background: #f4fff6; 
+            transform: translateX(5px);
+        }
+
+        /* RESULTADO FINAL */
+        #result-display { display: none; padding: 30px; border-radius: 15px; background: #fff; border: 4px solid #28a745; }
+        #res-title { color: #c04836; font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; }
+        #res-desc { font-size: 1.15rem; text-align: justify; color: #444; margin-bottom: 25px; line-height: 1.6; }
+        
+        .btn-action { background: #1a3a6d; color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="header-top">Qjuris <span>Simulados</span></div>
+
+    <div class="quiz-container">
+        <h1 id="main-h1">Descubra sua vocação no Direito</h1>
+        <div class="progress-container"><div id="progress-bar"></div></div>
+
+        <div id="quiz-steps">
+            <div class="question-box active" id="step1">
+                <p class="question-text">⚖️ 1. Diante de um conflito grave, qual é a sua primeira reação instintiva?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Investigar quem está mentindo e buscar a justiça custe o que custar.</button>
+                    <button class="btn-option" onclick="vote('civil')">Analisar os documentos e ver o que foi assinado em contrato.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Tentar mediar para que a parte mais fraca não seja prejudicada.</button>
+                    <button class="btn-option" onclick="vote('publico')">Verificar se houve desrespeito à Constituição ou às normas do Estado.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="step2">
+                <p class="question-text">📖 2. Qual tipo de leitura jurídica mais prende sua atenção?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Inquéritos policiais, provas periciais e teses de legítima defesa.</button>
+                    <button class="btn-option" onclick="vote('civil')">Direitos de propriedade, sucessões e grandes acordos empresariais.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Relações de emprego, direitos sociais e cálculos de indenizações.</button>
+                    <button class="btn-option" onclick="vote('publico')">Decisões do STF, gestão pública e licitações do Governo.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="step3">
+                <p class="question-text">🏢 3. No ambiente de trabalho, como você se destaca?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Pela coragem em sustentar teses polêmicas e falar em público.</button>
+                    <button class="btn-option" onclick="vote('civil')">Pela organização impecável e atenção aos mínimos detalhes dos prazos.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Pela facilidade em lidar com pessoas e resolver crises humanas.</button>
+                    <button class="btn-option" onclick="vote('publico')">Pela capacidade de análise estratégica e visão política das leis.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="step4">
+                <p class="question-text">🚨 4. Imagine que você recebeu um caso impossível. O que te faria aceitá-lo?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Impedir que uma injustiça contra a liberdade de alguém seja cometida.</button>
+                    <button class="btn-option" onclick="vote('civil')">A complexidade técnica e o valor envolvido no patrimônio da causa.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Restaurar a dignidade de um trabalhador ou a saúde de uma empresa.</button>
+                    <button class="btn-option" onclick="vote('publico')">O impacto que essa decisão teria para toda a sociedade ou para o país.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="step5">
+                <p class="question-text">🏆 5. Qual desses cenários de "vitória" te daria mais prazer?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Ouvir o "Absolvido" após um júri emocionante de 12 horas.</button>
+                    <button class="btn-option" onclick="vote('civil')">Finalizar uma fusão de empresas bilionária sem nenhuma falha contratual.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Conseguir uma conciliação justa que encerra anos de briga judicial.</button>
+                    <button class="btn-option" onclick="vote('publico')">Vencer uma ação civil pública que garante um direito para milhares de cidadãos.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="step6">
+                <p class="question-text">🏛️ 6. Se você pudesse mudar algo no sistema jurídico, o que seria?</p>
+                <div class="options-list">
+                    <button class="btn-option" onclick="vote('penal')">Aumentar o rigor nas investigações e garantir o devido processo penal.</button>
+                    <button class="btn-option" onclick="vote('civil')">Tornar os processos de cobrança e propriedade mais ágeis e seguros.</button>
+                    <button class="btn-option" onclick="vote('trabalho')">Simplificar a burocracia para quem gera emprego e protege o trabalhador.</button>
+                    <button class="btn-option" onclick="vote('publico')">Combater a corrupção e tornar a administração pública mais eficiente.</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-display">
+            <h2 id="res-title"></h2>
+            <div id="res-desc"></div>
+            <button class="btn-action" onclick="location.reload()">Refazer</button>
+            <a href="quizzes.html" style="text-decoration:none;"><button class="btn-action" style="background:#888; color:white;">Voltar</button></a>
+        </div>
+    </div>
+
+    <script>
+        let scores = { penal: 0, civil: 0, trabalho: 0, publico: 0 };
+        let currentStep = 1;
+
+        function vote(area) {
+            scores[area]++;
+            document.getElementById('step' + currentStep).classList.remove('active');
+            if (currentStep < 6) {
+                currentStep++;
+                document.getElementById('step' + currentStep).classList.add('active');
+                document.getElementById('progress-bar').style.width = (currentStep / 6 * 100) + '%';
+            } else {
+                showFinalResult();
+            }
+        }
+
+        function showFinalResult() {
+            document.getElementById('quiz-steps').style.display = 'none';
+            document.getElementById('main-h1').innerText = "Resultado da Análise";
+            document.getElementById('result-display').style.display = 'block';
+            let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            let title = document.getElementById('res-title');
+            let desc = document.getElementById('res-desc');
+
+            const res = {
+                penal: ["🚨 Perfil Criminalista", "Você possui um perfil combativo e uma forte sede de justiça. No Direito Penal, você encontrará o dinamismo necessário para sua personalidade. Sua coragem para defender a liberdade individual faz de você o profissional ideal para os tribunais."],
+                civil: ["🏠 Perfil Civilista", "Organização, técnica e estratégia patrimonial são seus pontos fortes. Você se sente em casa lidando com contratos, relações familiares e propriedades. Sua atenção aos detalhes garantirá uma carreira sólida."],
+                trabalho: ["💼 Perfil Laboralista", "Você tem um olhar apurado para as relações sociais e o equilíbrio econômico. Gosta de lidar com pessoas e buscar a paz social através da proteção de direitos fundamentais."],
+                publico: ["🏛️ Perfil Publicista", "Seu pensamento é macro e analítico. Você foca na estrutura do Estado, no bem comum e na política das leis. Você tem o perfil ideal para carreiras públicas de elite ou consultorias governamentais."]
+            };
+
+            title.innerText = res[winner][0];
+            desc.innerHTML = res[winner][1];
+        }
+    </script>
+</body>
+</html>

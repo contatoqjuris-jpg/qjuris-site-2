@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Testes - Qjuris</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+        
+        /* Cabeçalho Escuro */
+        .header { 
+            background-color: #212121; 
+            padding: 30px; 
+            text-align: center; 
+            color: white; 
+            position: relative; 
+        }
+        .header h1 { margin: 0; font-size: 2rem; }
+        .header span { color: #c04836; }
+
+        /* ESTILO DA FLECHA DE VOLTAR */
+        .back-nav {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .back-arrow {
+            text-decoration: none;
+            color: #f1b44c;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .back-arrow:hover { color: #c04836; }
+
+        /* Container que alinha os cards */
+        .container { 
+            max-width: 1200px; 
+            margin: 50px auto; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            padding: 0 20px; 
+            flex-wrap: wrap; 
+        }
+
+        /* O Card Branco */
+        .card { 
+            background: white; 
+            width: 320px; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            text-decoration: none; 
+            color: inherit; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            padding-bottom: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+        
+        .card-img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
+        
+        .card-content { padding: 25px 20px; text-align: center; }
+        
+        .card-content h3 { 
+            margin: 0 0 15px 0; 
+            color: #c04836; 
+            font-size: 1.4rem; 
+            font-weight: bold;
+        }
+        
+        .card-content p { 
+            font-size: 1rem; 
+            color: #666; 
+            margin-bottom: 25px; 
+            line-height: 1.4;
+            min-height: 45px;
+        }
+        
+        /* Botão Amarelo "JOGAR" */
+        .btn-jogar { 
+            background-color: #f1b44c; 
+            color: black;
+            padding: 12px 45px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="back-nav">
+            <a href="index.html" class="back-arrow" title="Voltar ao Início">←</a>
+        </div>
+        <h1>Teste Suas <span>Habilidades</span></h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="card" onclick="window.location.href='signos.html'">
+            <img src="capa.signos.jpg" class="card-img" alt="Mapa Astral Acadêmico">
+            <div class="card-content">
+                <h3 style="color: #c04836;">Mapa Astral Acadêmico</h3>
+                <p>Descubra qual elemento do zodíaco regia seus dias de faculdade.</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </div>
+
+        <a href="cachorros.html" class="card">
+            <img src="capa-cachorros.jpg" class="card-img" alt="Cachorros">
+            <div class="card-content">
+                <h3>Versão Cachorro</h3>
+                <p>Quem era você na sala de aula se fosse um pet?</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </a>
+
+        <a href="carros.html" class="card">
+            <img src="capa.carros.jpg" class="card-img" alt="Carros">
+            <div class="card-content">
+                <h3>Qual seu Carro?</h3>
+                <p>A máquina que combina com sua carreira jurídica.</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </a>
+
+        <a href="series.html" class="card">
+            <img src="capa.series.jpg" class="card-img" alt="Séries">
+            <div class="card-content">
+                <h3>Personagem de Séries</h3>
+                <p>Quem é você no tribunal das séries famosas?</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </a>
+
+        <a href="nerd.html" class="card">
+            <img src="capa.nerd.direito.jpg" class="card-img" alt="Nerd Jurídico">
+            <div class="card-content">
+                <h3>Perfil Nerd-Geek</h3>
+                <p>Qual ícone da cultura pop representa sua mente no Direito?</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </a>
+
+        <a href="etica.oab.html" class="card">
+            <img src="capa.etica.jpg" class="card-img" alt="Ética Profissional OAB">
+            <div class="card-content">
+                <h3>Ética Profissional OAB</h3>
+                <p>Simulado dinâmico com as 8 questões mais importantes para a sua aprovação.</p>
+                <div class="btn-jogar">JOGAR</div>
+            </div>
+        </a>
+
+    </div>
+
+</body>
+</html>
