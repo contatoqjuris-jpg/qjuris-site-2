@@ -1,0 +1,10 @@
+\---
+
+title: Teste
+
+\---
+
+
+
+Primeira notícia
+
