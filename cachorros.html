@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Quem era você na sala de aula? - Versão Cachorro</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f0f0f0; overflow-x: hidden; }
+        
+        /* Design Mantido Intacto */
+        .capa-container { 
+            position: fixed; 
+            width: 100%; 
+            height: 100vh; 
+            z-index: -1;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('capa-cachorros.jpg') center/cover no-repeat;
+        }
+
+        /* FLECHA DE VOLTAR TESTES */
+        .back-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+        .back-arrow {
+            text-decoration: none;
+            color: #f1b44c;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        #intro { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            color: white; 
+            text-align: center; 
+            padding: 20px;
+        }
+        #intro h1 { font-size: 3.5rem; text-shadow: 3px 3px 15px rgba(0,0,0,0.8); margin-bottom: 10px; }
+        #intro p { font-size: 1.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); margin-bottom: 30px; }
+        
+        .btn-start { 
+            background-color: #f1b44c; 
+            color: #212121; 
+            border: none; 
+            padding: 20px 60px; 
+            font-size: 1.6rem; 
+            font-weight: bold; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+            transition: 0.3s; 
+        }
+        .btn-start:hover { transform: scale(1.1); background-color: white; }
+
+        .quiz-box { 
+            display: none; 
+            max-width: 600px; 
+            margin: 80px auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            text-align: center; 
+            position: relative; 
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-opt { 
+            display: block; 
+            width: 100%; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border: 2px solid #eee; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-size: 1.1rem; 
+            font-weight: 500;
+            transition: 0.3s; 
+            background: white; 
+            color: #333;
+        }
+        .btn-opt:hover { background: #fff4e1; border-color: #f1b44c; transform: translateX(5px); }
+
+        .res-img { width: 100%; border-radius: 15px; border: 5px solid #c04836; margin-top: 20px; }
+        
+        .btn-restart {
+            padding: 15px 30px; 
+            cursor: pointer; 
+            background: #f1b44c; 
+            border: none; 
+            font-weight: bold; 
+            border-radius: 10px; 
+            margin-top: 20px;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .btn-home {
+            background: #212121;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="capa-container"></div>
+
+    <div class="back-nav">
+        <a href="testes.html" class="back-arrow" title="Voltar aos testes">←</a>
+    </div>
+
+    <div id="intro">
+        <h1>Teste: Quem era você na sala de aula?</h1>
+        <p>Descubra sua personalidade jurídica na versão pet!</p>
+        <button class="btn-start" onclick="iniciarQuiz()">DESCOBRIR AGORA</button>
+    </div>
+
+    <div id="quiz" class="quiz-box">
+        <h2 id="question" style="color: #212121; margin-bottom: 25px;"></h2>
+        <div id="options"></div>
+    </div>
+
+    <div id="result" class="quiz-box">
+        <h2 style="color: #666; font-size: 1rem; text-transform: uppercase;">Seu resultado é:</h2>
+        <h1 id="res-name" style="color:#c04836; margin: 10px 0;"></h1>
+        <img id="res-photo" src="" class="res-img">
+        <p id="res-text" style="font-size: 1.2rem; margin-top: 20px; color: #444; line-height: 1.5;"></p>
+        <button class="btn-restart" onclick="location.reload()">Refazer o Teste</button>
+        <button class="btn-restart btn-home" onclick="window.location.href='index.html'">Página Inicial</button>
+    </div>
+
+    <script>
+        const questions = [
+            { 
+                q: "1. Onde você costumava sentar na sala?", 
+                a: { collie: "Primeira fileira", golden: "No meio da galera", bulldog: "Lá no fundão (conforto total)", pastor: "Canto estratégico", pinscher: "Na frente vigiando tudo", caramelo: "Onde desse para enturmar" } 
+            },
+            { 
+                q: "2. Como era seu caderno ou Vade Mecum?", 
+                a: { collie: "Cheio de marca-texto colorido", pastor: "Organizado por doutrina", caramelo: "Folhas soltas e rabiscos", pinscher: "Anotando vacilos dos colegas", golden: "Pegava emprestado dos outros", bulldog: "Tinha só o básico para passar" } 
+            },
+            { 
+                q: "3. O professor faz uma pergunta difícil. O que você faz?", 
+                a: { pastor: "Responde com seriedade", golden: "Faz uma piada pra descontrair", pinscher: "Questiona a tese do professor", caramelo: "Usa a lábia pra enrolar", collie: "Explica a técnica perfeita", bulldog: "Finge que está dormindo" } 
+            },
+            { 
+                q: "4. Qual era sua prioridade no intervalo?", 
+                a: { bulldog: "Garantir o primeiro lugar na fila do lanche", golden: "Saber de todas as fofocas", pinscher: "Vigiar se ninguém mexe no meu lugar", caramelo: "Conseguir aquela xerox que faltava", collie: "Tirar dúvidas com o mestre", pastor: "Revisar o próximo ponto" } 
+            },
+            { 
+                q: "5. Trabalho em grupo! Quem é você?", 
+                a: { pinscher: "O que lidera e manda em todo mundo", collie: "O que faz a parte difícil", golden: "O que une o grupo e traz café", caramelo: "O que apresenta com carisma", pastor: "O que revisa as normas da ABNT", bulldog: "O que concorda com tudo e ajuda" } 
+            },
+            { 
+                q: "6. O que você fazia quando o professor faltava?", 
+                a: { pastor: "Ia pra biblioteca estudar", golden: "Puxava o coro pro happy hour", bulldog: "Tirava um cochilo na mesa mesmo", caramelo: "Dava um jeito de sair mais cedo", pinscher: "Ficava bravo porque queria aula", collie: "Ficava adiantando os resumos" } 
+            }
+        ];
+
+        let scores = {golden:0, collie:0, pastor:0, bulldog:0, caramelo:0, pinscher:0};
+        let current = 0;
+
+        function iniciarQuiz() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('quiz').style.display = 'block';
+            showQ();
+        }
+
+        function showQ() {
+            const q = questions[current];
+            document.getElementById('question').innerText = q.q;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = ""; 
+            
+            Object.keys(q.a).forEach(key => {
+                const button = document.createElement('button');
+                button.className = 'btn-opt';
+                button.innerText = q.a[key];
+                button.onclick = () => vote(key);
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        function vote(key) {
+            scores[key]++; 
+            current++;
+            if(current < questions.length) {
+                showQ();
+            } else {
+                showRes();
+            }
+        }
+
+        function showRes() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'block';
+            
+            const win = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            
+            const data = {
+                golden: ["Golden Retriever", "O queridinho da turma! Amigo de todos e rei do happy hour.", "res.golden.jpg"],
+                collie: ["Border Collie", "O gênio da sala! Seus resumos valem ouro e você sabe tudo.", "res.collie.jpg"],
+                caramelo: ["Vira-lata Caramelo", "Rei do improviso! Seu carisma te salvou em todas as provas.", "res.caramelo.jpg"],
+                pastor: ["Pastor Alemão", "A autoridade! Disciplinado e o exemplo de seriedade da sala.", "res.pastor.jpg"],
+                bulldog: ["Bulldog Inglês", "O sossegado! Estava lá pela companhia e pela hora do lanche.", "res.bulldog.jpg"],
+                pinscher: ["Pinscher", "O invocado! Pequeno mas com autoridade gigante. Ninguém mexe com você!", "res.pinscher.jpg"]
+            };
+
+            document.getElementById('res-name').innerText = data[win][0];
+            document.getElementById('res-photo').src = data[win][2];
+            document.getElementById('res-text').innerText = data[win][1];
+        }
+    </script>
+</body>
+</html>

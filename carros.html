@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qual advogado(a) você seria de acordo com carros - Qjuris</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #f0f2f5; 
+            background-image: 
+                radial-gradient(circle at 5% 10%, rgba(241, 180, 76, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 95% 90%, rgba(192, 72, 54, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(26, 58, 109, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+
+        /* FLECHA DE VOLTAR TESTES */
+        .back-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .back-arrow {
+            text-decoration: none;
+            color: #f1b44c;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .back-arrow:hover { color: #c04836; }
+
+        .header-top { background-color: #212121; padding: 20px 5%; text-align: center; color: white; font-weight: bold; font-size: 1.2rem; }
+        .header-top span { color: #c04836; }
+        .quiz-container { max-width: 700px; margin: 40px auto; background: white; padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; border: 1px solid #ddd; position: relative; }
+        h1 { color: #1a3a6d; font-size: 1.8rem; margin-bottom: 10px; }
+        #sub-title { color: #555; font-size: 1.1rem; margin-bottom: 20px; }
+        .progress-container { background: #e9ecef; border-radius: 10px; height: 16px; margin: 25px 0; overflow: hidden; border: 1px solid #ccc; display: none; }
+        #progress-bar { background: linear-gradient(90deg, #f1b44c 0%, #28a745 100%); width: 0%; height: 100%; transition: width 0.6s ease; }
+        
+        .question-box { display: none; background: #fff; padding: 30px; border-radius: 15px; border-top: 8px solid #f1b44c; border-left: 8px solid #1a3a6d; border-right: 8px solid #c04836; margin-bottom: 20px; }
+        .active { display: block !important; animation: fadeIn 0.4s ease-out; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        p.question-text { font-size: 1.25rem; font-weight: 700; color: #1a3a6d; text-align: left; margin-bottom: 25px; line-height: 1.4; }
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .btn-option { background: #fdfdfd; border: 2px solid #eee; padding: 18px; border-radius: 12px; font-size: 1rem; cursor: pointer; text-align: left; transition: 0.3s; color: #444; width: 100%; }
+        .btn-option:hover { border-color: #28a745; background: #f4fff6; transform: translateX(5px); }
+        
+        #result-display { display: none; padding: 30px; border-radius: 15px; background: #fff; border: 4px solid #28a745; }
+        .car-img { width: 100%; max-width: 500px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); border: 2px solid #ddd; }
+        #res-title { color: #c04836; font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; }
+        #res-desc { font-size: 1.15rem; text-align: left; color: #444; margin-bottom: 25px; line-height: 1.6; background: #f9f9f9; padding: 25px; border-radius: 10px; border-left: 5px solid #1a3a6d; }
+        .btn-action { background: #1a3a6d; color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 10px; }
+        .btn-home { background: #212121; color: white; }
+        
+        .capa-img { width: 100%; border-radius: 15px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
+        .btn-jogar { background: #f1b44c; color: #000; padding: 15px 40px; font-size: 1.2rem; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="testes.html" class="back-arrow" title="Voltar aos testes">←</a>
+    </div>
+
+    <div class="header-top">Qjuris <span>Simulados</span></div>
+    
+    <div class="quiz-container">
+        <h1 id="main-h1">Qual seria seu carro?</h1>
+        <p id="sub-title">Confira a máquina que combina com sua carreira jurídica.</p>
+        
+        <img src="capa.carros.jpg" class="capa-img" alt="Capa">
+
+        <div id="capa-inicial">
+            <button class="btn-jogar" onclick="iniciarTeste()">JOGAR</button>
+        </div>
+
+        <div class="progress-container" id="progresso-container">
+            <div id="progress-bar"></div>
+        </div>
+        
+        <div id="quiz-steps" style="display: none;">
+            <div class="question-box active" id="q1">
+                <p class="question-text">⚖️ 1. Qual sua frase ou postura típica em uma audiência?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. “Excelência, com a devida vênia...” (Tradição)</button>
+                    <button class="btn-option" data-vote="civic">2. Foco total em organização e prazos.</button>
+                    <button class="btn-option" data-vote="s10">3. Fala direta, resolvendo olho no olho.</button>
+                    <button class="btn-option" data-vote="camaro">4. Presença de impacto para fechar grandes contratos.</button>
+                    <button class="btn-option" data-vote="skyline">5. Tese técnica buscando mudar a jurisprudência.</button>
+                    <button class="btn-option" data-vote="jetta">6. Networking agressivo e agilidade total.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="q2">
+                <p class="question-text">💼 2. Em qual dessas áreas você mais se identifica?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. Criminalista ou Trabalhista raiz.</button>
+                    <button class="btn-option" data-vote="civic">2. Empresarial focado em estabilidade.</button>
+                    <button class="btn-option" data-vote="s10">3. Direito Agrário ou Imobiliário rural.</button>
+                    <button class="btn-option" data-vote="camaro">4. Consumidor ou Indenizações vultosas.</button>
+                    <button class="btn-option" data-vote="skyline">5. Tributário de alta complexidade.</button>
+                    <button class="btn-option" data-vote="jetta">6. Bancário ou Direito Societário.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="q3">
+                <p class="question-text">📱 3. Como é sua presença digital?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. Pouca exposição, prefiro o boca a boca.</button>
+                    <button class="btn-option" data-vote="civic">2. Perfil informativo e educativo.</button>
+                    <button class="btn-option" data-vote="s10">3. Mostro a lida entre o escritório e o campo.</button>
+                    <button class="btn-option" data-vote="camaro">4. Muitos reels e marketing de impacto.</button>
+                    <button class="btn-option" data-vote="skyline">5. Discreto, posto apenas vitórias técnicas.</button>
+                    <button class="btn-option" data-vote="jetta">6. Posto rotina dinâmica e reuniões.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="q4">
+                <p class="question-text">🏢 4. Como é seu escritório dos sonhos?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. Madeira pesada e muitos livros físicos.</button>
+                    <button class="btn-option" data-vote="civic">2. Clean, funcional e super organizado.</button>
+                    <button class="btn-option" data-vote="s10">3. Estilo rústico com elementos de fazenda.</button>
+                    <button class="btn-option" data-vote="camaro">4. Parede preta, logo dourado e luxo.</button>
+                    <button class="btn-option" data-vote="skyline">5. Minimalista, tecnológico e moderno.</button>
+                    <button class="btn-option" data-vote="jetta">6. Prédio de vidro com muito networking.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="q5">
+                <p class="question-text">☕ 5. Como é sua rotina matinal?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. Café coado forte e jornal impresso.</button>
+                    <button class="btn-option" data-vote="civic">2. Café equilibrado e revisão da agenda.</button>
+                    <button class="btn-option" data-vote="s10">3. Café farto pra aguentar o dia puxado.</button>
+                    <button class="btn-option" data-vote="camaro">4. Café de luxo com o primeiro Story do dia.</button>
+                    <button class="btn-option" data-vote="skyline">5. Café gourmet lendo artigos técnicos.</button>
+                    <button class="btn-option" data-vote="jetta">6. Expresso rápido checando o WhatsApp.</button>
+                </div>
+            </div>
+
+            <div class="question-box" id="q6">
+                <p class="question-text">📂 6. Como lida com processos complexos?</p>
+                <div class="options-list">
+                    <button class="btn-option" data-vote="omega">1. Lê com calma marcando tudo no papel.</button>
+                    <button class="btn-option" data-vote="civic">2. Organiza tudo em fluxogramas e prazos.</button>
+                    <button class="btn-option" data-vote="s10">3. Vai direto ao ponto prático do caso.</button>
+                    <button class="btn-option" data-vote="camaro">4. Analisa o impacto financeiro e o bônus.</button>
+                    <button class="btn-option" data-vote="skyline">5. Usa tecnologia para achar brechas técnicas.</button>
+                    <button class="btn-option" data-vote="jetta">6. Delega e foca na estratégia de rede.</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-display">
+            <h2 id="res-title"></h2>
+            <img id="res-img" class="car-img" src="" alt="Resultado">
+            <div id="res-desc"></div>
+            <button class="btn-action" onclick="window.location.reload()">Refazer Teste</button>
+            <button class="btn-action btn-home" onclick="window.location.href='index.html'">Página Inicial</button>
+        </div>
+    </div>
+
+    <script>
+        const scores = { omega: 0, civic: 0, s10: 0, camaro: 0, skyline: 0, jetta: 0 };
+        let currentQ = 1;
+        const totalQ = 6;
+
+        function iniciarTeste() {
+            document.getElementById('capa-inicial').style.display = 'none';
+            document.getElementById('quiz-steps').style.display = 'block';
+            document.getElementById('progresso-container').style.display = 'block';
+        }
+
+        document.querySelectorAll('.btn-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const v = this.getAttribute('data-vote');
+                if (v && scores.hasOwnProperty(v)) {
+                    scores[v]++;
+                }
+                
+                document.getElementById('q' + currentQ).classList.remove('active');
+                currentQ++;
+                
+                const progress = ((currentQ - 1) / totalQ) * 100;
+                document.getElementById('progress-bar').style.width = progress + '%';
+
+                if (currentQ <= totalQ) {
+                    document.getElementById('q' + currentQ).classList.add('active');
+                } else {
+                    document.querySelector('.capa-img').style.display = 'none';
+                    mostrarResultado();
+                }
+            });
+        });
+
+        function mostrarResultado() {
+            document.getElementById('quiz-steps').style.display = 'none';
+            document.getElementById('sub-title').style.display = 'none';
+            document.getElementById('progresso-container').style.display = 'none';
+            document.getElementById('main-h1').innerText = "Sua Máquina Jurídica";
+            
+            let win = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            
+            const data = {
+                omega: { t: "Chevrolet Ômega", d: "Você é a tradição pura. Respeitado pela história, impõe respeito onde chega sem precisar gritar.", i: "res.omega.jpg" },
+                civic: { t: "Honda Civic", d: "Confiável, eficiente e moderno. Você não falha em prazos e passa segurança total para o cliente.", i: "res.civic.jpg" },
+                s10: { t: "Chevrolet S10", d: "O braço forte do Direito. Resolve o problema no tribunal ou na fazenda. Raiz e direto.", i: "res.s10.jpg" },
+                camaro: { t: "Chevrolet Camaro", d: "O marketing em pessoa. Sabe se vender, gosta do impacto e de grandes causas.", i: "res.camaro.jpg" },
+                skyline: { t: "Nissan Skyline", d: "O cirurgião das teses. Domina teorias complexas e usa a inteligência como sua maior arma.", i: "res.skyline.jpg" },
+                jetta: { t: "VW Jetta", d: "Velocidade e ambição. Foca no networking agressivo e em crescer rápido na carreira jurídica.", i: "res.jetta.jpg" }
+            };
+
+            const res = data[win];
+            document.getElementById('res-title').innerText = "Você seria um: " + res.t;
+            document.getElementById('res-img').src = res.i;
+            document.getElementById('res-desc').innerText = res.d;
+            document.getElementById('result-display').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
