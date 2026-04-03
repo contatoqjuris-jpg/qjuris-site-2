@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Seu Perfil Nerd Jurídico | QJuris</title>
+    <style>
+        /* --- CSS: LAYOUT NERD/GEEK --- */
+        :root {
+            --primary-glee: #ff3e7f;
+            --secondary-glee: #33ffcc;
+            --nerd-yellow: #f1c40f;
+            --bg-color: #121212; 
+            --text-color: #ffffff;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color); 
+            margin: 0; padding: 0; color: var(--text-color);
+        }
+
+        .header { 
+            background-color: #000; padding: 15px 25px; 
+            border-bottom: 2px solid var(--primary-glee);
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative;
+        }
+        .header h1 { margin: 0; font-size: 0.9rem; color: var(--secondary-glee); letter-spacing: 1px; flex-grow: 1; text-align: center; }
+
+        /* FLECHA DE VOLTAR */
+        .back-arrow {
+            text-decoration: none;
+            color: var(--secondary-glee);
+            font-size: 1.8rem;
+            font-weight: bold;
+            line-height: 1;
+            position: absolute;
+            left: 20px;
+        }
+
+        .container { 
+            max-width: 800px; margin: 40px auto; 
+            background: rgba(255, 255, 255, 0.05); padding: 30px; 
+            border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        #start-card { text-align: center; }
+        
+        .card-image {
+            display: block;
+            width: 35%; 
+            height: auto; 
+            margin: 0 auto 20px auto; 
+            border-radius: 10px;
+            border: 3px solid var(--primary-glee);
+        }
+
+        .card-title { font-size: 1.8rem; color: var(--secondary-glee); margin-bottom: 15px; font-weight: 800; }
+        .btn-start {
+            background: var(--primary-glee); color: white; border: none;
+            padding: 15px 40px; font-size: 1.1rem; font-weight: bold;
+            border-radius: 30px; cursor: pointer; transition: 0.3s;
+        }
+
+        #quiz-area { display: none; }
+        .question-block { margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; }
+        .question-text { font-size: 1.1rem; margin-bottom: 15px; color: var(--nerd-yellow); font-weight: bold; }
+
+        .option-item { margin-bottom: 10px; }
+        .option-item label { 
+            display: flex; align-items: center; padding: 12px; 
+            border: 1px solid #444; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .option-item label:hover { background: rgba(51, 255, 204, 0.1); border-color: var(--secondary-glee); }
+        .option-item input { margin-right: 15px; accent-color: var(--secondary-glee); }
+
+        .btn-finish {
+            background: var(--secondary-glee); color: #000; border: none;
+            padding: 15px; font-size: 1.1rem; font-weight: bold;
+            border-radius: 5px; cursor: pointer; width: 100%;
+        }
+
+        #result-area { 
+            display: none; text-align: center; padding: 30px; 
+            border: 2px solid var(--secondary-glee); border-radius: 15px;
+            background: rgba(0,0,0,0.4);
+        }
+        .result-name { font-size: 2.2rem; color: var(--primary-glee); margin-bottom: 15px; font-weight: 800; }
+        .result-desc { text-align: left; line-height: 1.6; color: #ddd; margin-bottom: 20px; }
+        
+        /* BOTÕES DE FINALIZAÇÃO */
+        .btn-reset { margin-top: 10px; background: none; border: 1px solid #666; color: #aaa; cursor: pointer; padding: 10px 20px; border-radius: 5px; }
+        .btn-back-home { 
+            display: inline-block; margin-top: 20px; background: var(--secondary-glee); 
+            color: #000; text-decoration: none; padding: 12px 25px; 
+            font-weight: bold; border-radius: 5px; margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a href="testes.html" class="back-arrow">←</a>
+    <h1>QJURIS NERD-GEEK</h1>
+    <div style="font-size: 0.7rem; color: #666; position: absolute; right: 20px;">QUIZ</div>
+</div>
+
+<div class="container">
+    <div id="start-card">
+        <img src="capa.nerd.direito.jpg" alt="Capa Quiz" class="card-image" onerror="this.src='https://via.placeholder.com/300x200?text=Quiz+Direito'">
+        <div class="card-title">Qual Nerd/Geek você é no Direito?</div>
+        <p style="color: #ccc; margin-bottom: 25px;">Responda às 6 perguntas e descubra sua personalidade jurídica.</p>
+        <button class="btn-start" onclick="startQuiz()">INICIAR QUIZ</button>
+    </div>
+
+    <form id="quizForm" style="display:none;">
+        <div id="quiz-area">
+            <div class="question-block">
+                <div class="question-text">1. Qual sua principal arma em uma audiência?</div>
+                <div class="option-item"><label><input type="radio" name="q1" value="A"> A observação meticulosa de contradições nos depoimentos.</label></div>
+                <div class="option-item"><label><input type="radio" name="q1" value="B"> O uso de provas digitais e perícias inovadoras.</label></div>
+                <div class="option-item"><label><input type="radio" name="q1" value="C"> Citar a doutrina clássica que ninguém mais conhece.</label></div>
+                <div class="option-item"><label><input type="radio" name="q1" value="D"> O cumprimento rigoroso de cada etapa do rito processual.</label></div>
+                <div class="option-item"><label><input type="radio" name="q1" value="E"> A calma e o preparo técnico de quem estudou anos para estar ali.</label></div>
+                <div class="option-item"><label><input type="radio" name="q1" value="F"> Uma sustentação oral emocionante e cheia de referências.</label></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-text">2. Como você organiza seu material de trabalho?</div>
+                <div class="option-item"><label><input type="radio" name="q2" value="A"> Pastas divididas por evidências e fatos comprovados.</label></div>
+                <div class="option-item"><label><input type="radio" name="q2" value="B"> Gadgets, softwares de gestão e armazenamento em nuvem.</label></div>
+                <div class="option-item"><label><input type="radio" name="q2" value="C"> Uma biblioteca física impecável e Vade Mecums marcados.</label></div>
+                <div class="option-item"><label><input type="radio" name="q2" value="D"> Planilhas de prazos com alertas para cada segundo.</label></div>
+                <div class="option-item"><label><input type="radio" name="q2" value="E"> Cadernos de resumos sistemáticos e cronogramas de estudo.</label></div>
+                <div class="option-item"><label><input type="radio" name="q2" value="F"> Slides visuais, vídeos e elementos de Legal Design.</label></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-text">3. O que mais te irrita no sistema jurídico?</div>
+                <div class="option-item"><label><input type="radio" name="q3" value="A"> Quando a verdade está na cara de todos, mas ninguém vê.</label></div>
+                <div class="option-item"><label><input type="radio" name="q3" value="B"> A lentidão burocrática e a falta de modernização.</label></div>
+                <div class="option-item"><label><input type="radio" name="q3" value="C"> Petições com erros de português e falta de base teórica.</label></div>
+                <div class="option-item"><label><input type="radio" name="q3" value="D"> Quando os juízes não seguem os protocolos estabelecidos.</label></div>
+                <div class="option-item"><label><input type="radio" name="q3" value="E"> A falta de meritocracia e disciplina no ambiente de trabalho.</label></div>
+                <div class="option-item"><label><input type="radio" name="q3" value="F"> Audiências frias, mecânicas e sem espaço para o debate humano.</label></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-text">4. Qual seria o seu "superpoder" no escritório?</div>
+                <div class="option-item"><label><input type="radio" name="q4" value="A"> Enxergar a "peça que falta" no quebra-cabeça do processo.</label></div>
+                <div class="option-item"><label><input type="radio" name="q4" value="B"> Resolver problemas complexos com soluções simples e ágeis.</label></div>
+                <div class="option-item"><label><input type="radio" name="q4" value="C"> Ter lido e memorizado todos os acórdãos relevantes.</label></div>
+                <div class="option-item"><label><input type="radio" name="q4" value="D"> Nunca, jamais, perder um prazo ou cometer erro de forma.</label></div>
+                <div class="option-item"><label><input type="radio" name="q4" value="E"> Manter o foco absoluto mesmo sob pressão extrema.</label></div>
+                <div class="option-item"><label><input type="radio" name="q4" value="F"> Transformar um caso técnico em uma história inspiradora.</label></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-text">5. Como você lida com um cliente difícil?</div>
+                <div class="option-item"><label><input type="radio" name="q5" value="A"> Faço perguntas diretas até ele admitir os fatos reais.</label></div>
+                <div class="option-item"><label><input type="radio" name="q5" value="B"> Tento entender a dor dele e busco uma saída criativa.</label></div>
+                <div class="option-item"><label><input type="radio" name="q5" value="C"> Explico pacientemente os conceitos jurídicos envolvidos.</label></div>
+                <div class="option-item"><label><input type="radio" name="q5" value="D"> Sigo estritamente o contrato de honorários e o protocolo.</label></div>
+                <div class="option-item"><label><input type="radio" name="q5" value="E"> Mantenho a educação e a ética, focando no resultado final.</label></div>
+                <div class="option-item"><label><input type="radio" name="q5" value="F"> Uso minha empatia e lábia para acalmá-lo e ganhar confiança.</label></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-text">6. Qual o seu objetivo final na carreira?</div>
+                <div class="option-item"><label><input type="radio" name="q6" value="A"> Ser o maior especialista em investigação e provas.</label></div>
+                <div class="option-item"><label><input type="radio" name="q6" value="B"> Revolucionar o Direito com novas tecnologias.</label></div>
+                <div class="option-item"><label><input type="radio" name="q6" value="C"> Tornar-se um acadêmico ou magistrado respeitado pela técnica.</label></div>
+                <div class="option-item"><label><input type="radio" name="q6" value="D"> Ser referência em gestão e eficiência processual.</label></div>
+                <div class="option-item"><label><input type="radio" name="q6" value="E"> Conquistar o cargo público dos sonhos através do mérito.</label></div>
+                <div class="option-item"><label><input type="radio" name="q6" value="F"> Ser o advogado mais influente e persuasivo do país.</label></div>
+            </div>
+
+            <button type="button" class="btn-finish" onclick="calculate()">REVELAR MEU PERFIL</button>
+        </div>
+    </form>
+
+    <div id="result-area">
+        <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: #888; margin-bottom: 10px;">Perfil Jurídico Identificado</div>
+        <img id="res-img" src="" alt="Personagem" style="width: 40%; border-radius: 10px; border: 2px solid var(--primary-glee); margin-bottom: 15px;">
+        <div id="res-name" class="result-name"></div>
+        <div id="res-desc" class="result-desc"></div>
+        
+        <button class="btn-reset" onclick="location.reload()">Refazer Teste</button>
+        <a href="testes.html" class="btn-back-home">Voltar aos Testes</a>
+    </div>
+
+</div>
+
+<script>
+    function startQuiz() {
+        document.getElementById('start-card').style.display = 'none';
+        document.getElementById('quizForm').style.display = 'block';
+        document.getElementById('quiz-area').style.display = 'block';
+        window.scrollTo(0,0);
+    }
+
+    function calculate() {
+        const form = document.getElementById('quizForm');
+        const data = new FormData(form);
+        const scores = {A:0, B:0, C:0, D:0, E:0, F:0};
+        let count = 0;
+        
+        for (let v of data.values()) { scores[v]++; count++; }
+        
+        if (count < 6) { alert("Responda todas as 6 perguntas!"); return; }
+
+        let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+        const results = {
+            A: {n: "Velma Dinkley", img: "perfil.velma.jpg", d: "A Analista de Provas: Você é a mente lógica. No Direito, foca em perícias e detalhes que ninguém vê. Resolve casos através da análise fria dos fatos."},
+            B: {n: "Peter Parker", img: "perfil.peter.jpg", d: "O Gênio Digital: Brilhante em Direito Tecnológico. Você encontra soluções criativas e usa a ciência para proteger os direitos dos mais fracos."},
+            C: {n: "Hermione Granger", img: "perfil.hermione.jpg", d: "A Doutrinadora: Você domina a biblioteca. Sua arma é o conhecimento absoluto da lei e da teoria. Ninguém vence você no debate técnico."},
+            D: {n: "C-3PO", img: "perfil.c3po.jpg", d: "O Mestre do Processo: Você é o guardião dos ritos e prazos. Garante que nada saia dos trilhos regimentais e evita erros burocráticos com precisão."},
+            E: {n: "Gohan", img: "perfil.gohan.jpg", d: "O Intelectual Disciplinado: Você busca o topo acadêmico. Seu foco é o estudo constante e a preparação para grandes cargos, agindo com ética e foco."},
+            F: {n: "Artie Abrams", img: "perfil.artie.jpg", d: "O Orador Criativo: Você transforma o tribunal em palco. Usa tecnologia e cultura pop para fazer sustentações orais memoráveis e persuasivas."}
+        };
+
+        form.style.display = 'none';
+        document.getElementById('result-area').style.display = 'block';
+        document.getElementById('res-name').innerText = results[winner].n;
+        document.getElementById('res-desc').innerText = results[winner].d;
+        document.getElementById('res-img').src = results[winner].img; 
+        window.scrollTo(0,0);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Simulado Ética OAB</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #0b1f3a;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    background: white;
+    color: black;
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 700px;
+    border-radius: 10px;
+}
+
+.questao {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+button {
+    background: red;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+canvas {
+    margin-top: 20px;
+    border: 3px solid gold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Simulado Ética OAB</h2>
+
+<input type="text" id="nome" placeholder="Digite seu nome">
+
+<div class="questao">
+<p>1. Sigilo é:</p>
+<label><input type="radio" name="q1" value="a"> Obrigatório</label><br>
+<label><input type="radio" name="q1" value="b"> Opcional</label>
+</div>
+
+<div class="questao">
+<p>2. Publicidade deve ser:</p>
+<label><input type="radio" name="q2" value="a"> Moderada</label><br>
+<label><input type="radio" name="q2" value="b"> Agressiva</label>
+</div>
+
+<button onclick="finalizar()">Finalizar</button>
+
+<canvas id="canvas" width="800" height="500"></canvas>
+
+</div>
+
+<script>
+function finalizar() {
+
+    try {
+
+        const nome = document.getElementById("nome").value.trim();
+
+        if (nome === "") {
+            alert("Digite seu nome!");
+            return;
+        }
+
+        const respostas = {
+            q1: "a",
+            q2: "a"
+        };
+
+        let acertos = 0;
+
+        for (let q in respostas) {
+            const marcada = document.querySelector(`input[name="${q}"]:checked`);
+            if (marcada && marcada.value === respostas[q]) {
+                acertos++;
+            }
+        }
+
+        let porcentagem = (acertos / 2) * 100;
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.src = "certificado.jpg";
+
+        img.onload = function () {
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            ctx.font = "bold 24px Arial";
+            ctx.fillStyle = "#000";
+            ctx.textAlign = "center";
+
+            ctx.fillText("Eu, " + nome + ",", canvas.width / 2, 200);
+
+            if (porcentagem >= 60) {
+                ctx.fillText("Aprovado (" + porcentagem.toFixed(0) + "%)", canvas.width / 2, 250);
+            } else {
+                ctx.fillText("Reprovado (" + porcentagem.toFixed(0) + "%)", canvas.width / 2, 250);
+            }
+        };
+
+        img.onerror = function () {
+            alert("Erro ao carregar certificado.jpg");
+        };
+
+    } catch (erro) {
+        alert("Erro no sistema: " + erro.message);
+    }
+}
+</script>
+
+</body>
+</html>

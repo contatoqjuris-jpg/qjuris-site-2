@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Ética OAB - QJuris</title>
+
+<link rel="stylesheet" href="etica.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SIMULADO ÉTICA OAB 2026</h1>
+
+    <p class="aviso">
+        Informe seu nome para validação do certificado. O documento será liberado mediante aproveitamento mínimo de 60% no simulado.
+    </p>
+
+    <input type="text" id="nome" placeholder="Digite seu nome completo">
+
+    <div id="quiz">
+
+        <!-- QUESTÃO 1 -->
+        <div class="questao">
+            <p>1. O advogado deve atuar com:</p>
+            <label><input type="radio" name="q1" value="a"> Sigilo profissional</label><br>
+            <label><input type="radio" name="q1" value="b"> Publicidade excessiva</label><br>
+            <label><input type="radio" name="q1" value="c"> Captação de clientes</label>
+        </div>
+
+        <!-- QUESTÃO 2 -->
+        <div class="questao">
+            <p>2. O Código de Ética da OAB prevê:</p>
+            <label><input type="radio" name="q2" value="a"> Mercantilização da advocacia</label><br>
+            <label><input type="radio" name="q2" value="b"> Dignidade da profissão</label><br>
+            <label><input type="radio" name="q2" value="c"> Propaganda enganosa</label>
+        </div>
+
+        <!-- QUESTÃO 3 -->
+        <div class="questao">
+            <p>3. É vedado ao advogado:</p>
+            <label><input type="radio" name="q3" value="a"> Defender cliente</label><br>
+            <label><input type="radio" name="q3" value="b"> Divulgar resultados garantidos</label><br>
+            <label><input type="radio" name="q3" value="c"> Atuar com ética</label>
+        </div>
+
+        <!-- QUESTÃO 4 -->
+        <div class="questao">
+            <p>4. A publicidade na advocacia deve ser:</p>
+            <label><input type="radio" name="q4" value="a"> Moderada</label><br>
+            <label><input type="radio" name="q4" value="b"> Agressiva</label><br>
+            <label><input type="radio" name="q4" value="c"> Sensacionalista</label>
+        </div>
+
+        <!-- QUESTÃO 5 -->
+        <div class="questao">
+            <p>5. O sigilo profissional é:</p>
+            <label><input type="radio" name="q5" value="a"> Facultativo</label><br>
+            <label><input type="radio" name="q5" value="b"> Obrigatório</label><br>
+            <label><input type="radio" name="q5" value="c"> Inexistente</label>
+        </div>
+
+    </div>
+
+    <button onclick="finalizar()">Finalizar Simulado</button>
+
+    <canvas id="canvas" width="1000" height="700"></canvas>
+
+</div>
+
+<script src="etica.js"></script>
+
+</body>
+</html>

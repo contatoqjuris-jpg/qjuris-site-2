@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qjuris - Ética OAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --header-bg: #000000;
+            --qjuris-white: #ffffff;
+            --simulados-red: #c04836;
+            --gold: #f1b44c;
+            --dark-gray: #1e1e1e; 
+            --card-gray: #2d2d2d; 
+            --text-light: #e0e0e0;
+            --option-bg: #383838;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--dark-gray);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .header-top {
+            background-color: var(--header-bg);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold);
+        }
+        .logo { font-size: 1.6rem; font-weight: bold; color: var(--qjuris-white); text-decoration: none; }
+        .logo span { color: var(--simulados-red); }
+        .back-nav-top { text-decoration: none; color: var(--gold); font-size: 1.8rem; font-weight: bold; }
+
+        .main-container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .progress-container {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--gold);
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .question-slide {
+            display: none; 
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-card {
+            padding: 40px;
+            background: var(--card-gray);
+            border-radius: 4px;
+            border-top: 5px solid var(--gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .question-text { 
+            font-weight: bold; 
+            font-size: 1.25rem; 
+            margin-bottom: 30px; 
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .options-container label {
+            display: block;
+            margin: 12px 0;
+            padding: 18px;
+            background: var(--option-bg);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid #444;
+            font-size: 1.05rem;
+        }
+
+        .options-container label:hover {
+            border-color: var(--gold);
+            background: #454545;
+        }
+
+        input[type="radio"] { margin-right: 15px; transform: scale(1.3); accent-color: var(--gold); }
+
+        .btn-next {
+            margin-top: 30px;
+            padding: 15px 45px;
+            background-color: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            float: right;
+        }
+
+        #gabarito-final { display: none; }
+
+        .feedback-card {
+            background: #252525;
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 6px solid #444;
+        }
+
+        .feedback-acerto { border-left-color: var(--success); }
+        .feedback-erro { border-left-color: var(--danger); }
+
+        .status-badge { font-weight: bold; text-transform: uppercase; font-size: 0.9rem; display: block; margin-bottom: 10px; }
+        .status-acerto { color: var(--success); }
+        .status-erro { color: var(--danger); }
+
+        .comentario { margin-top: 10px; color: #ddd; font-size: 1rem; line-height: 1.5; }
+
+        .footer-nav { text-align: center; margin-top: 50px; padding-bottom: 60px; }
+        .back-link-final {
+            text-decoration: none;
+            color: var(--gold);
+            font-weight: bold;
+            border: 1px solid var(--gold);
+            padding: 12px 25px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .back-link-final:hover { background: var(--gold); color: #000; }
+    </style>
+</head>
+<body>
+
+    <div class="header-top">
+        <a href="index.html" class="back-nav-top">←</a>
+        <div class="logo">Qjuris <span>Simulados</span></div>
+        <div style="width: 40px;"></div>
+    </div>
+
+    <div class="main-container">
+        <div id="progress" class="progress-container">Questão 1 de 8</div>
+
+        <form id="quizForm">
+            <div class="question-slide active" id="slide1">
+                <div class="question-card">
+                    <p class="question-text">1. O advogado Dr. Marcos, ao chegar para uma audiência de custódia, é impedido de conversar reservadamente com seu cliente antes do ato, sob a justificativa de que o parlatório está em reforma. De acordo com o Estatuto da Advocacia (EAOAB):</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q1" value="E"> A) O direito de comunicação é relativo e pode ser postergado para após a audiência.</label>
+                        <label><input type="radio" name="q1" value="C"> B) O advogado tem o direito de comunicar-se com seus clientes, pessoal e reservadamente, mesmo sem procuração.</label>
+                        <label><input type="radio" name="q1" value="E"> C) A comunicação só é permitida se houver autorização judicial prévia no caso de crimes hediondos.</label>
+                        <label><input type="radio" name="q1" value="E"> D) O diretor da unidade prisional pode vedar a comunicação por razões de segurança interna.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(2)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide2">
+                <div class="question-card">
+                    <p class="question-text">2. A advogada Maria retém injustificadamente os autos de um processo por 30 dias após o vencimento do prazo de devolução, prejudicando o feito. Qual a sanção disciplinar aplicável, em regra, a esta conduta?</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q2" value="E"> A) Censura.</label>
+                        <label><input type="radio" name="q2" value="E"> B) Exclusão.</label>
+                        <label><input type="radio" name="q2" value="C"> C) Suspensão.</label>
+                        <label><input type="radio" name="q2" value="E"> D) Multa cumulada com advertência verbal.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(3)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide3">
+                <div class="question-card">
+                    <p class="question-text">3. Sobre a fixação de honorários contratuais, assinale a alternativa CORRETA:</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q3" value="E"> A) Os honorários contratuais devem ser obrigatoriamente inferiores aos honorários de sucumbência.</label>
+                        <label><input type="radio" name="q3" value="E"> B) É nula a cláusula quota litis (pagamento sobre o êxito) em qualquer circunstância.</label>
+                        <label><input type="radio" name="q3" value="C"> C) Os honorários advocatícios prescrevem em cinco anos, contados do vencimento do contrato ou do trânsito em julgado.</label>
+                        <label><input type="radio" name="q3" value="E"> D) O advogado não pode cobrar honorários antes de finalizar o processo.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(4)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide4">
+                <div class="question-card">
+                    <p class="question-text">4. O advogado que decide renunciar ao mandato em um processo em curso deve:</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q4" value="E"> A) Abandonar a causa imediatamente após o protocolo da renúncia.</label>
+                        <label><input type="radio" name="q4" value="C"> B) Continuar representando o cliente por 10 dias após a notificação, salvo se substituído antes.</label>
+                        <label><input type="radio" name="q4" value="E"> C) Aguardar o juiz nomear um defensor público para poder sair do caso.</label>
+                        <label><input type="radio" name="q4" value="E"> D) Devolver todos os honorários recebidos, independente do trabalho realizado.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(5)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide5">
+                <div class="question-card">
+                    <p class="question-text">5. Qual o quórum necessário para que o Conselho Seccional aplique a sanção de Exclusão a um advogado?</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q5" value="E"> A) Maioria simples dos presentes.</label>
+                        <label><input type="radio" name="q5" value="E"> B) Unanimidade dos membros do conselho.</label>
+                        <label><input type="radio" name="q5" value="C"> C) Manifestação favorável de dois terços dos membros do conselho competente.</label>
+                        <label><input type="radio" name="q5" value="E"> D) Voto de minoria qualificada de 1/3 dos membros.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(6)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide6">
+                <div class="question-card">
+                    <p class="question-text">6. Sobre o dever de sigilo profissional do advogado, é correto afirmar que:</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q6" value="E"> A) O sigilo é um direito do cliente, mas não configura um dever do advogado.</label>
+                        <label><input type="radio" name="q6" value="C"> B) O advogado pode quebrar o sigilo em caso de grave ameaça ao direito à vida ou à honra, ou para sua própria defesa.</label>
+                        <label><input type="radio" name="q6" value="E"> C) O sigilo cessa obrigatoriamente se o advogado for demitido pelo cliente por justa causa.</label>
+                        <label><input type="radio" name="q6" value="E"> D) Documentos entregues pelo cliente ao advogado não são protegidos pelo sigilo.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(7)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide7">
+                <div class="question-card">
+                    <p class="question-text">7. De acordo com as regras vigentes da OAB sobre publicidade, o advogado pode:</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q7" value="E"> A) Anunciar seus serviços em rádio e televisão aberta.</label>
+                        <label><input type="radio" name="q7" value="E"> B) Utilizar "outdoors" e painéis luminosos para divulgar o escritório em rodovias.</label>
+                        <label><input type="radio" name="q7" value="C"> C) Realizar impulsionamento em redes sociais, desde que tenha caráter informativo e sem mercantilização.</label>
+                        <label><input type="radio" name="q7" value="E"> D) Divulgar o valor de seus honorários em panfletos de distribuição pública.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="nextSlide(8)">Próxima ➔</button>
+                </div>
+            </div>
+
+            <div class="question-slide" id="slide8">
+                <div class="question-card">
+                    <p class="question-text">8. Um Deputado Estadual advogado deseja atuar em uma causa contra o Estado em que exerce o mandato. Nessa situação:</p>
+                    <div class="options-container">
+                        <label><input type="radio" name="q8" value="E"> A) Ele é incompatível, não podendo exercer a advocacia em nenhuma hipótese.</label>
+                        <label><input type="radio" name="q8" value="C"> B) Ele é impedido de exercer a advocacia contra a Fazenda Pública vinculada àquela unidade federativa.</label>
+                        <label><input type="radio" name="q8" value="E"> C) Ele pode advogar livremente, pois o mandato legislativo não gera restrição profissional.</label>
+                        <label><input type="radio" name="q8" value="E"> D) Ele só pode advogar se renunciar formalmente ao subsídio de parlamentar.</label>
+                    </div>
+                    <button type="button" class="btn-next" onclick="finalizar()">Finalizar ➔</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="gabarito-final">
+            <h1 style="color:var(--gold); text-align: center;">Resultado do Simulado</h1>
+            <div id="feedback-lista"></div>
+            
+            <div class="footer-nav">
+                <a href="testes.html" class="back-link-final">⬅ Ver Outros Simulados</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const comentarios = [
+            "Q1: Correta B. O Art. 7º, III do EAOAB garante a comunicação pessoal e reservada mesmo sem procuração.",
+            "Q2: Correta C. A retenção abusiva de autos é infração que gera suspensão (Art. 37, I).",
+            "Q3: Correta C. O prazo prescricional para cobrança de honorários é de 5 anos (Art. 25).",
+            "Q4: Correta B. O advogado deve assistir o cliente por 10 dias após a notificação da renúncia (Art. 5º).",
+            "Q5: Correta C. A sanção de exclusão exige quórum qualificado de 2/3 dos membros (Art. 38).",
+            "Q6: Correta B. O sigilo cede diante de justa causa, como defesa da vida ou honra (Art. 37 CED).",
+            "Q7: Correta C. O Provimento 205/2021 permite o impulsionamento informativo em redes sociais.",
+            "Q8: Correta B. Parlamentares são impedidos de advogar contra a Fazenda que os remunera (Art. 30, II)."
+        ];
+
+        function nextSlide(n) {
+            document.querySelector('.question-slide.active').classList.remove('active');
+            document.getElementById('slide' + n).classList.add('active');
+            document.getElementById('progress').innerText = "Questão " + n + " de 8";
+            window.scrollTo(0, 0);
+        }
+
+        function finalizar() {
+            let htmlGabarito = "";
+            for(let i = 1; i <= 8; i++) {
+                const radios = document.getElementsByName('q' + i);
+                let selecionada = null;
+                for(let r of radios) { if(r.checked) selecionada = r.value; }
+
+                const acerto = (selecionada === "C");
+                const classe = acerto ? "feedback-acerto" : "feedback-erro";
+                const status = acerto ? "status-acerto" : "status-erro";
+                const textoStatus = acerto ? "✓ Resposta Correta" : "✗ Resposta Incorreta";
+
+                htmlGabarito += `
+                    <div class="feedback-card ${classe}">
+                        <span class="status-badge ${status}">${textoStatus}</span>
+                        <div class="comentario">${comentarios[i-1]}</div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('quizForm').style.display = 'none';
+            document.getElementById('progress').style.display = 'none';
+            document.getElementById('gabarito-final').style.display = 'block';
+            document.getElementById('feedback-lista').innerHTML = htmlGabarito;
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

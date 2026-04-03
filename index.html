@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qjuris</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',Arial,sans-serif;
+background:#f4f4f4;
+color:#333;
+}
+
+.header{
+background:#212121;
+padding:15px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+.logo{color:white;font-weight:bold;font-size:1.5rem;}
+.logo span{color:#c04836;}
+.nav{display:flex;gap:20px;}
+.nav a{color:#f1b44c;text-decoration:none;font-weight:bold;font-size:0.9rem;}
+.nav a:hover{color:#c04836;}
+
+@media(max-width:768px){
+.header{flex-direction:column;text-align:center;}
+.nav{flex-direction:column;gap:10px;margin-top:10px;}
+}
+
+.news-container{
+max-width:1400px;
+margin:40px auto;
+padding:0 10px;
+}
+.news-card{
+background:white;
+border-radius:12px;
+padding:15px;
+margin-bottom:25px;
+border-left:5px solid #f1b44c;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+.news-card img{
+width:100%;
+height:260px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:10px;
+}
+.category{
+color:#c04836;
+font-weight:bold;
+font-size:0.8rem;
+text-transform:uppercase;
+}
+.news-card h2{
+margin:8px 0;
+font-size:1.5rem;
+color:#212121;
+}
+.news-card p{
+color:#555;
+line-height:1.6;
+}
+.read-more{
+display:inline-block;
+margin-top:12px;
+color:#1a3a6d;
+font-weight:bold;
+text-decoration:none;
+border:1px solid #1a3a6d;
+padding:8px 20px;
+border-radius:5px;
+}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+padding:0 15px;
+}
+.card{
+background:white;
+width:300px;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+text-decoration:none;
+color: inherit;
+display:flex;
+flex-direction:column;
+align-items:center;
+transition:0.3s;
+}
+.card:hover{transform: translateY(-5px);}
+.card img{width:100%;height:180px;object-fit:cover;}
+.card h3{color:#c04836;}
+.card p{font-size:0.9rem;color:#666;padding:0 15px;}
+.btn{
+background:#f1b44c;
+padding:10px 25px;
+border-radius:6px;
+margin:10px;
+font-weight:bold;
+}
+
+.cta{
+background:#c04836;
+color:white;
+text-align:center;
+padding:12px;
+margin-top:40px;
+}
+.btn-main{
+background:#f1b44c;
+padding:12px 30px;
+border-radius:6px;
+display:inline-block;
+margin-top:10px;
+color:black;
+text-decoration:none;
+font-weight:bold;
+}
+
+.footer{
+background:#000;
+color:#ccc;
+text-align:center;
+padding:10px;
+font-size:0.75rem;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">Qjuris <span>Simulados</span></div>
+
+<div class="nav">
+<a href="testes.html">Teste Suas Habilidades</a>
+<a href="simulado.html">Simulado OAB</a>
+<a href="noticias.html">Notícias</a> <!-- ✅ ALTERADO AQUI -->
+<a href="quem-somos.html">Quem Somos</a>
+<a href="politica.html">Política do Site</a>
+<a href="contato.html">Contato</a>
+</div>
+</div>
+
+<!-- NOTÍCIAS DINÂMICAS -->
+<div class="news-container" id="lista-noticias"></div>
+
+<!-- TESTES -->
+<div class="container">
+<a href="signos.html" class="card"><img src="capa.signos.jpg"><h3>Mapa Astral Acadêmico</h3><p>Descubra qual elemento do zodíaco regia seus dias de faculdade.</p><div class="btn">JOGAR</div></a>
+<a href="cachorros.html" class="card"><img src="capa-cachorros.jpg"><h3>Versão Cachorro</h3><p>Quem era você na sala de aula se fosse um pet?</p><div class="btn">JOGAR</div></a>
+<a href="carros.html" class="card"><img src="capa.carros.jpg"><h3>Qual seu Carro?</h3><p>A máquina que combina com sua carreira jurídica.</p><div class="btn">JOGAR</div></a>
+<a href="series.html" class="card"><img src="capa.series.jpg"><h3>Personagem de Séries</h3><p>Quem é você no tribunal das séries famosas?</p><div class="btn">JOGAR</div></a>
+<a href="nerd.html" class="card"><img src="capa.nerd.direito.jpg"><h3>Perfil Nerd-Geek</h3><p>Qual ícone da cultura pop representa sua mente no Direito?</p><div class="btn">JOGAR</div></a>
+<a href="etica.oab.html" class="card"><img src="capa.etica.jpg"><h3>Ética Profissional OAB</h3><p>Simulado dinâmico com questões essenciais.</p><div class="btn">JOGAR</div></a>
+</div>
+
+<div class="cta">
+Simulado OAB Grátis<br>
+<a href="simulado.html" class="btn-main">COMECE AGORA</a>
+</div>
+
+<div class="footer">
+QJuris Simulados e Notícias 2026. Todos os direitos reservados.
+</div>
+
+<!-- JS -->
+<script src="noticias.js"></script>
+<script>
+const container = document.getElementById("lista-noticias");
+
+// mostra só as 7 mais recentes
+noticias.slice().reverse().slice(0,7).forEach(n => {
+container.innerHTML += `
+<div class="news-card">
+<img src="${n.imagem}">
+<span class="category">${n.categoria}</span>
+<h2>${n.titulo}</h2>
+<p>${n.descricao}</p>
+<a href="${n.link}" class="read-more">LER NOTÍCIA COMPLETA →</a>
+</div>
+`;
+});
+</script>
+
+</body>
+</html>
